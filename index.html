@@ -26,46 +26,48 @@
         .sfw{background:#2ed573}
         #result{margin-top:20px;padding:20px;background:rgba(0,0,0,0.3);border-radius:15px;display:none}
         #result img{max-width:100%;border-radius:10px;margin-top:10px;max-height:400px}
-        .json-output{background:#1e1e1e;padding:15px;border-radius:10px;overflow-x:auto;font-family:monospace;font-size:0.9em;margin-top:10px;text-align:left}
+        .json-output{background:#1e1e1e;padding:15px;border-radius:10px;overflow-x:auto;font-family:monospace;font-size:0.9em;margin-top:10px;text-align:left;white-space:pre-wrap;word-break:break-all}
         footer{text-align:center;margin-top:40px;opacity:0.7}
         code{background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:4px}
+        .hash{color:#ffd700}
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Waifu API</h1>
-        <p class="subtitle">API de imágenes de anime para GitHub Pages</p>
+        <p class="subtitle">API de imágenes de anime - GitHub Pages</p>
         
         <div class="card">
-            <h2>Endpoints Disponibles</h2>
+            <h2>Formato de API</h2>
+            <p style="margin-bottom:20px">Usa <span class="hash">/#/</span> para las rutas de API:</p>
             
             <div class="endpoint">
-                <div><span class="method">GET</span><span class="url">/api?type=sfw&category=waifu</span></div>
-                <button class="btn" onclick="testApi('sfw','waifu')">Probar</button>
+                <div><span class="method">GET</span><span class="url">/#/sfw/waifu</span></div>
+                <button class="btn" onclick="location.hash='#/sfw/waifu';handleRoute()">Probar</button>
             </div>
             <div class="endpoint">
-                <div><span class="method">GET</span><span class="url">/api?type=sfw&category=kiss</span></div>
-                <button class="btn" onclick="testApi('sfw','kiss')">Probar</button>
+                <div><span class="method">GET</span><span class="url">/#/sfw/kiss</span></div>
+                <button class="btn" onclick="location.hash='#/sfw/kiss';handleRoute()">Probar</button>
             </div>
             <div class="endpoint">
-                <div><span class="method">GET</span><span class="url">/api?type=sfw&category=neko</span></div>
-                <button class="btn" onclick="testApi('sfw','neko')">Probar</button>
+                <div><span class="method">GET</span><span class="url">/#/sfw/neko</span></div>
+                <button class="btn" onclick="location.hash='#/sfw/neko';handleRoute()">Probar</button>
             </div>
             <div class="endpoint">
-                <div><span class="method nsfw-tag">GET</span><span class="url">/api?type=nsfw&category=waifu</span></div>
-                <button class="btn" onclick="testApi('nsfw','waifu')">Probar</button>
+                <div><span class="method nsfw-tag">GET</span><span class="url">/#/nsfw/waifu</span></div>
+                <button class="btn" onclick="location.hash='#/nsfw/waifu';handleRoute()">Probar</button>
             </div>
             <div class="endpoint">
-                <div><span class="method nsfw-tag">GET</span><span class="url">/api?type=nsfw&category=kiss</span></div>
-                <button class="btn" onclick="testApi('nsfw','kiss')">Probar</button>
+                <div><span class="method nsfw-tag">GET</span><span class="url">/#/nsfw/kiss</span></div>
+                <button class="btn" onclick="location.hash='#/nsfw/kiss';handleRoute()">Probar</button>
             </div>
             <div class="endpoint">
-                <div><span class="method nsfw-tag">GET</span><span class="url">/api?type=nsfw&category=neko</span></div>
-                <button class="btn" onclick="testApi('nsfw','neko')">Probar</button>
+                <div><span class="method nsfw-tag">GET</span><span class="url">/#/nsfw/neko</span></div>
+                <button class="btn" onclick="location.hash='#/nsfw/neko';handleRoute()">Probar</button>
             </div>
             <div class="endpoint">
-                <div><span class="method nsfw-tag">GET</span><span class="url">/api?type=nsfw&category=futa</span></div>
-                <button class="btn" onclick="testApi('nsfw','futa')">Probar</button>
+                <div><span class="method nsfw-tag">GET</span><span class="url">/#/nsfw/futa</span></div>
+                <button class="btn" onclick="location.hash='#/nsfw/futa';handleRoute()">Probar</button>
             </div>
         </div>
         
@@ -88,20 +90,10 @@
             </div>
         </div>
         
-        <div class="card" id="result" style="display:none">
+        <div class="card" id="result">
             <h2>Resultado</h2>
             <div class="json-output" id="json-result"></div>
             <img id="preview-img" style="display:none" alt="Waifu">
-        </div>
-        
-        <div class="card">
-            <h2>Uso de la API</h2>
-            <p style="margin-bottom:15px">Parámetros:</p>
-            <ul style="list-style:none;line-height:2">
-                <li><code>type</code>: <strong>sfw</strong> o <strong>nsfw</strong></li>
-                <li><code>category</code>: waifu, kiss, neko, futa</li>
-                <li><code>all</code>: <strong>true</strong> para ver todas</li>
-            </ul>
         </div>
         
         <footer>
