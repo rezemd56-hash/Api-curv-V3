@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waifu API</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;color:#fff;padding:20px}
+        .container{max-width:900px;margin:0 auto}
+        h1{text-align:center;font-size:3em;margin-bottom:10px;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
+        .subtitle{text-align:center;opacity:0.9;margin-bottom:40px}
+        .card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);border-radius:20px;padding:30px;margin-bottom:30px;border:1px solid rgba(255,255,255,0.2)}
+        h2{margin-bottom:20px;color:#ffd700}
+        .endpoint{background:rgba(0,0,0,0.3);padding:15px;border-radius:10px;margin:10px 0;font-family:'Courier New',monospace;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+        .method{background:#4CAF50;padding:5px 15px;border-radius:20px;font-size:0.8em;font-weight:bold}
+        .nsfw-tag{background:#ff4757!important}
+        .url{color:#81C784;word-break:break-all}
+        .btn{background:#ff6b6b;color:white;border:none;padding:8px 20px;border-radius:25px;cursor:pointer;font-size:0.9em;transition:transform 0.2s}
+        .btn:hover{transform:scale(1.05);background:#ff5252}
+        .categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:20px}
+        .category-box{background:rgba(255,255,255,0.1);padding:20px;border-radius:15px;text-align:center}
+        .category-box h3{color:#ffd700;margin-bottom:10px}
+        .tag{display:inline-block;background:rgba(255,255,255,0.2);padding:5px 15px;border-radius:20px;margin:5px;font-size:0.9em}
+        .nsfw{background:#ff4757}
+        .sfw{background:#2ed573}
+        #result{margin-top:20px;padding:20px;background:rgba(0,0,0,0.3);border-radius:15px;display:none}
+        #result img{max-width:100%;border-radius:10px;margin-top:10px;max-height:400px}
+        .json-output{background:#1e1e1e;padding:15px;border-radius:10px;overflow-x:auto;font-family:monospace;font-size:0.9em;margin-top:10px;text-align:left}
+        footer{text-align:center;margin-top:40px;opacity:0.7}
+        code{background:rgba(0,0,0,0.3);padding:2px 8px;border-radius:4px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Waifu API</h1>
+        <p class="subtitle">API de imágenes de anime para GitHub Pages</p>
+        
+        <div class="card">
+            <h2>Endpoints Disponibles</h2>
+            
+            <div class="endpoint">
+                <div><span class="method">GET</span><span class="url">/api?type=sfw&category=waifu</span></div>
+                <button class="btn" onclick="testApi('sfw','waifu')">Probar</button>
+            </div>
+            <div class="endpoint">
+                <div><span class="method">GET</span><span class="url">/api?type=sfw&category=kiss</span></div>
+                <button class="btn" onclick="testApi('sfw','kiss')">Probar</button>
+            </div>
+            <div class="endpoint">
+                <div><span class="method">GET</span><span class="url">/api?type=sfw&category=neko</span></div>
+                <button class="btn" onclick="testApi('sfw','neko')">Probar</button>
+            </div>
+            <div class="endpoint">
+                <div><span class="method nsfw-tag">GET</span><span class="url">/api?type=nsfw&category=waifu</span></div>
+                <button class="btn" onclick="testApi('nsfw','waifu')">Probar</button>
+            </div>
+            <div class="endpoint">
+                <div><span class="method nsfw-tag">GET</span><span class="url">/api?type=nsfw&category=kiss</span></div>
+                <button class="btn" onclick="testApi('nsfw','kiss')">Probar</button>
+            </div>
+            <div class="endpoint">
+                <div><span class="method nsfw-tag">GET</span><span class="url">/api?type=nsfw&category=neko</span></div>
+                <button class="btn" onclick="testApi('nsfw','neko')">Probar</button>
+            </div>
+            <div class="endpoint">
+                <div><span class="method nsfw-tag">GET</span><span class="url">/api?type=nsfw&category=futa</span></div>
+                <button class="btn" onclick="testApi('nsfw','futa')">Probar</button>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Categorías</h2>
+            <div class="categories">
+                <div class="category-box">
+                    <h3>SFW</h3>
+                    <span class="tag sfw">waifu</span>
+                    <span class="tag sfw">kiss</span>
+                    <span class="tag sfw">neko</span>
+                </div>
+                <div class="category-box">
+                    <h3>NSFW</h3>
+                    <span class="tag nsfw">waifu</span>
+                    <span class="tag nsfw">kiss</span>
+                    <span class="tag nsfw">neko</span>
+                    <span class="tag nsfw">futa</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" id="result" style="display:none">
+            <h2>Resultado</h2>
+            <div class="json-output" id="json-result"></div>
+            <img id="preview-img" style="display:none" alt="Waifu">
+        </div>
+        
+        <div class="card">
+            <h2>Uso de la API</h2>
+            <p style="margin-bottom:15px">Parámetros:</p>
+            <ul style="list-style:none;line-height:2">
+                <li><code>type</code>: <strong>sfw</strong> o <strong>nsfw</strong></li>
+                <li><code>category</code>: waifu, kiss, neko, futa</li>
+                <li><code>all</code>: <strong>true</strong> para ver todas</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>Made with GitHub Pages</p>
+        </footer>
+    </div>
+    <script src="api.js"></script>
+</body>
+</html>
