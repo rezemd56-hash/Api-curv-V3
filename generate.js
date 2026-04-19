@@ -1,7 +1,7 @@
 const fs=require('fs');
 const path=require('path');
 
-// ⚠️ CAMBIA ESTO POR TU URL DE GITHUB PAGES
+// ⚠️ CAMBIA ESTO POR TU URL
 const BASE_URL='https://tusuario.github.io/waifu-api';
 
 const categories={
@@ -38,4 +38,4 @@ Object.entries(categories).forEach(([type,cats])=>{
     });
 });
 
-console.log('\nJSONs generados. Recuerda subir la carpeta data/ a GitHub');
+console.log('\n✅ JSONs generados');
