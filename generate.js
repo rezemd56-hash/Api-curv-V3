@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // ✅ TU URL REAL (V3)
-const BASE_URL = 'https://rezemd56-hash.github.io/Api-curv-V4';
+const BASE_URL = 'https://rezemd56-hash.github.io/Api-curv-V3';
 
 const categories = {
     sfw: ['waifu', 'kiss', 'neko'],
